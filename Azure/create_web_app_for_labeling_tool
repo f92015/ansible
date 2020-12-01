@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+   
+
+  tasks:
+  - name: Create a Resource Group
+    azure_rm_resourcegroup:
+      name: "{{ resource_group }}"
+      location: "{{ datacenter }}"
