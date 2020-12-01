@@ -3,26 +3,26 @@
   connection: local
   vars:
     resource_group: 'RG-USWest-test'
-    datacenter: 'westus'
-    app_name: 'myDockerWebapp'
+    location: 'westus'
+    webapp_name: 'myDockerWebapp'
     plan_name: 'myAppServicePlan'
     
   tasks:
   - name: Create a Resource Group
     azure_rm_resourcegroup:
       name: "{{ resource_group }}"
-      location: "{{ datacenter }}"
+      location: "{{ location }}"
  
   - name: Create a docker web app with some app settings, with docker image
     azure_rm_webapp:
       resource_group: "{{ resource_group }}"
-      name: "{{ app_name }}"
+      name: "{{ webapp_name }}"
       plan:
         resource_group: "{{ resource_group }}"
         name: "{{ plan_name }}"
         is_linux: true
         sku: S1
-        number_of_workers: 2
+        number_of_workers: 1
       app_settings:
         testkey: testvalue
         testkey2: testvalue2
