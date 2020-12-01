@@ -4,20 +4,22 @@
   vars:
     resource_group: 'RG-USWest-test'
     datacenter: 'westus'
+    app_name: 'myDockerWebapp'
+    plan_name: 'myAppServicePlan'
     
   tasks:
   - name: Create a Resource Group
     azure_rm_resourcegroup:
       name: "{{ resource_group }}"
       location: "{{ datacenter }}"
-      
+ 
   - name: Create a docker web app with some app settings, with docker image
     azure_rm_webapp:
       resource_group: "{{ resource_group }}"
-      name: myDockerWebapp
+      name: "{{app_name}}"
       plan:
         resource_group: "{{ resource_group }}"
-        name: myAppServicePlan
+        name: "{{plan_name}}"
         is_linux: true
         sku: S1
         number_of_workers: 2
@@ -26,7 +28,13 @@
         testkey2: testvalue2
       container_settings:
         name: ansible/ansible:ubuntu1404
+        registry_server_url: https://mcr.microsoft.com
+        registry_server_user: user
+        registry_server_password: pass
         
-        
-        
-        
+
+
+
+
+
+
