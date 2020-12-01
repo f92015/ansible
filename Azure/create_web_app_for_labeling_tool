@@ -3,9 +3,24 @@
   connection: local
   vars:
    
-
   tasks:
   - name: Create a Resource Group
     azure_rm_resourcegroup:
       name: "{{ resource_group }}"
       location: "{{ datacenter }}"
+      
+  - name: Create a docker web app with some app settings, with docker image
+    azure_rm_webapp:
+      resource_group: myResourceGroup
+      name: myDockerWebapp
+      plan:
+        resource_group: myAppServicePlan_rg
+        name: myAppServicePlan
+        is_linux: true
+        sku: S1
+        number_of_workers: 2
+      app_settings:
+        testkey: testvalue
+        testkey2: testvalue2
+      container_settings:
+        name: ansible/ansible:ubuntu1404
