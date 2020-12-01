@@ -16,10 +16,10 @@
   - name: Create a docker web app with some app settings, with docker image
     azure_rm_webapp:
       resource_group: "{{ resource_group }}"
-      name: "{{app_name}}"
+      name: "{{ app_name }}"
       plan:
         resource_group: "{{ resource_group }}"
-        name: "{{plan_name}}"
+        name: "{{ plan_name }}"
         is_linux: true
         sku: S1
         number_of_workers: 2
