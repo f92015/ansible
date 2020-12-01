@@ -2,7 +2,9 @@
 - hosts: localhost
   connection: local
   vars:
-   
+    resource_group: 'RG-USWest-test'
+    datacenter: 'westus'
+    
   tasks:
   - name: Create a Resource Group
     azure_rm_resourcegroup:
@@ -11,10 +13,10 @@
       
   - name: Create a docker web app with some app settings, with docker image
     azure_rm_webapp:
-      resource_group: myResourceGroup
+      resource_group: "{{ resource_group }}"
       name: myDockerWebapp
       plan:
-        resource_group: myAppServicePlan_rg
+        resource_group: "{{ resource_group }}"
         name: myAppServicePlan
         is_linux: true
         sku: S1
@@ -24,3 +26,7 @@
         testkey2: testvalue2
       container_settings:
         name: ansible/ansible:ubuntu1404
+        
+        
+        
+        
